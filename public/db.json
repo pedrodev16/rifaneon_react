@@ -1,0 +1,68 @@
+{
+  "user": {
+    "loggedIn": false,
+    "googleInfo": null,
+    "profile": {
+      "name": "pedro",
+      "lastname": "miguel"
+    },
+    "balance": 50.00
+  },
+  "raffles": {
+    "current": {
+      "id": "r_50",
+      "size": 50,
+      "ticketPrice": 5,
+      "soldTickets": [
+        {
+          "number": 3,
+          "name": "Carlos R."
+        },
+        {
+          "number": 15,
+          "name": "Ana S."
+        },
+        {
+          "number": 22,
+          "name": "Pedro G."
+        },
+        {
+          "number": 48,
+          "name": "Lucia M."
+        }
+      ]
+    }
+  },
+  "winners": [
+    {
+      "name": "Maria C.",
+      "number": 22,
+      "date": "2024-05-15",
+      "prize": 250
+    },
+    {
+      "name": "Juan P.",
+      "number": 7,
+      "date": "2024-05-10",
+      "prize": 100
+    },
+    {
+      "name": "Ana G.",
+      "number": 48,
+      "date": "2024-05-05",
+      "prize": 500
+    }
+  ],
+  "chat": {
+    "messages": [
+      {
+        "user": "Admin",
+        "text": "¡Bienvenidos al chat! ¡Mucha suerte a todos!"
+      },
+      {
+        "user": "Carlos22",
+        "text": "Hola a todos! A ver si gano hoy."
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './style.css'
+import App from './App.jsx'
+import { UserProvider } from "./ConText/UserContext";
+
+createRoot(document.getElementById('root')).render(
+
+  <UserProvider>
+    <App />
+  </UserProvider>
+);

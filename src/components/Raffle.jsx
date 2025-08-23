@@ -1,0 +1,122 @@
+import React, { useState, useEffect } from 'react';
+import { P_loader } from './P_loader';
+import { a } from 'framer-motion/client';
+import '../styles/mensajes.css';
+
+const Raffle = ({ selectedRaffleId, setSelectedRaffleId, tipo, setTipo, raffle, selectedRaffle, onSelectRaffle, handlers }) => {
+
+
+    useEffect(() => {
+
+        if (selectedRaffleId && raffle.length > 0) {
+            const found = raffle.find(r => r.id === selectedRaffleId);
+            if (found) {
+
+                onSelectRaffle(found);
+                //setTipo(found.size);
+                //  handlers.onRaffleSizeChange(found.size);
+            }
+        }
+
+    }, [selectedRaffleId, raffle, tipo, setTipo]);
+
+
+
+    // Inicializar con el primer tipo disponible
+
+    useEffect(() => {
+        if (!tipo && !selectedRaffleId) {
+
+            if (raffle.length > 0 && !selectedRaffleId) {
+                setSelectedRaffleId(raffle[0].id);
+                setTipo(raffle[0].size);
+                handlers.onRaffleSizeChange(raffle[0].size);
+            }
+        }
+    }, [raffle, tipo, setTipo]);
+
+
+
+    if (!selectedRaffle) return (<div className="flex justify-center mt-[10%]">
+        <div className="w-[89%] animated-gradient rounded-xl p-8 text-center shadow-xl">
+            <h1 className="text-5xl md:text-6xl font-extrabold text-white animate-bounce">
+                No hay tablas disponibles para jugar
+            </h1>
+        </div>
+    </div>
+
+
+    );
+
+    const numbers = Array.from({ length: selectedRaffle.size }, (_, i) => i + 1);
+    const progress = (selectedRaffle.soldTickets.length / selectedRaffle.size) * 100;
+
+    return (
+
+        <div className="raffle-container ">
+
+            <div className="raffle-header text-center py-6 animate-fade-in">
+                <h2 className="text-3xl font-bold text-white drop-shadow-md">
+                    🎉 Sorteo en Curso: <span className="text-yellow-400">{selectedRaffle.size}</span> Números
+                </h2>
+                <p className="text-lg text-gray-200 mt-2">{selectedRaffle.titulo}</p>
+                <p className="text-md text-gray-300 italic mt-1">
+                    ✨ ¡Elige tu número de la suerte y participa ahora!
+                </p>
+            </div>
+            <div className="raffle-controls">
+                <div className="ticket-price">
+                    Precio: <span>Bs {selectedRaffle.ticketPrice}</span>
+                </div>
+                <div className="raffle-size-selector">
+                    <span>Tamaño:</span>
+
+                    {
+
+                        raffle.map(r => (
+                            <button
+                                key={r.id}
+                                className={`btn ${r.size === tipo ? 'active' : ''}`}
+                                onClick={() => {
+                                    setSelectedRaffleId(r.id); // ← ¡Ahora sí dinámico!
+                                    setTipo(r.size);
+                                    alert(r.size)
+                                    handlers.onRaffleSizeChange(r.size);
+                                }}
+                            >
+                                {r.size}
+                            </button>
+                        ))
+                    }
+
+                </div>
+            </div>
+
+            <div className="progress-bar">
+                <div className="progress-bar-inner" style={{ width: `${progress}%` }}></div>
+                <div className="progress-label">
+                    {selectedRaffle.soldTickets.length} / {selectedRaffle.size} vendidos
+                </div>
+            </div>
+
+            <div className="number-grid">
+                {numbers.map(num => {
+                    const isSold = selectedRaffle.soldTickets.some(ticket => ticket.number === num);
+                    return (
+                        <button
+                            key={num}
+                            className={`number-btn ${isSold ? 'sold' : ''}`}
+                            disabled={isSold}
+                            onClick={() => handlers.onNumberClick(num, tipo)}
+                        >
+                            {num}
+                        </button>
+                    );
+                })}
+            </div>
+        </div>
+
+    );
+};
+
+export default Raffle;
