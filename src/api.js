@@ -142,7 +142,7 @@ export const getRifasActivas = async () => {
 
 export const getSaldo = async (token) => {
 
-    const baseURL = 'http://rifaneon.alwaysdata.net/api';
+    const baseURL = 'https://rifaneon.alwaysdata.net/api';
 
     try {
         const response = await axios.get(`${baseURL}/user/mi-saldo`, {
