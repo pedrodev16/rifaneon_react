@@ -68,7 +68,7 @@ export function UserProvider({ children }) {
                 telefono: res.data.telefono || "",
                 bank: res.data.bank || "",
                 account_type: res.data.account_type || "ahorro",
-                account_number: res.data.account_number || "",
+
 
             };
             const otrosDatos = {

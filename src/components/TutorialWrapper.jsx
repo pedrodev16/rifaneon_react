@@ -23,7 +23,7 @@ const TutorialWrapper = () => {
             {/* Botón flotante para ver el panel cuando quiera */}
             <button
                 onClick={() => setShowTutorial(true)}
-                className="fixed bottom-6 left-6 bg-yellow-400 text-black p-3 rounded-full shadow-lg hover:bg-yellow-500 transition z-40"
+                className="fixed top-1/2 right-6 transform -translate-y-1/2 bg-yellow-400 text-black p-3 rounded-full shadow-lg hover:bg-yellow-500 transition z-40"
                 title="Ver cómo jugar"
             >
                 <Info className="w-6 h-6" />

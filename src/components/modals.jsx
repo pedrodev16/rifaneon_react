@@ -3,6 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export const ConfirmModal = ({ isOpen, selectedNumber, ticketPrice, balance, onClose, onConfirm }) => {
 
+
+
+    function formatoMoneda(valor, moneda = "VES", locale = "es-VE") {
+        return new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: moneda,
+            minimumFractionDigits: 2,
+        }).format(valor);
+    }
+
     if (!isOpen) return null;
     const newBalance = balance - ticketPrice;
 
@@ -10,10 +20,10 @@ export const ConfirmModal = ({ isOpen, selectedNumber, ticketPrice, balance, onC
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <h2>Confirmar Compra</h2>
-                <p>¿Seguro que deseas comprar el número <strong>{selectedNumber}</strong> por <strong>${ticketPrice}</strong>?</p>
+                <p>¿Seguro que deseas comprar el número <strong>{selectedNumber}</strong> por <strong>{formatoMoneda(ticketPrice)}</strong>?</p>
                 <div className="balance-info">
-                    <p>Saldo actual: <strong>${balance}</strong></p>
-                    <p>Saldo después de la compra: <strong>${newBalance.toFixed(2)}</strong></p>
+                    <p>Saldo actual: <strong>{formatoMoneda(balance)}</strong></p>
+                    <p>Saldo después de la compra: <strong>{formatoMoneda(newBalance)}</strong></p>
                 </div>
                 <div className="modal-actions">
                     <button className="btn btn-danger" onClick={onClose}>Cancelar</button>
@@ -34,7 +44,7 @@ export const RechargeModal = ({ isOpen, onClose, onRecharge }) => {
                 <h2>Recargar Saldo</h2>
                 <form onSubmit={onRecharge}>
                     <div className="form-group">
-                        <label htmlFor="amount">Monto a recargar ($)</label>
+                        <label htmlFor="amount">Monto a recargar (Bs)</label>
                         <input type="number" id="amount" name="amount" step="0.01" min="1" required />
                     </div>
                     <div className="form-group">

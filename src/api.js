@@ -64,24 +64,24 @@ export const ComprarTicket = async (rifaId, number, token, raffle) => {
 };
 
 
-export const getGanador = async (selectedRaffle, token) => {
-    //     const baseURL = 'https://rifaneon.alwaysdata.net/api';
-    //     try {
-    //         const response = await axios.post(
-    //             `${baseURL}/rifas/${selectedRaffle.id}/terminar`,
-    //             {}, // cuerpo vacío
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${token}`
-    //                 }
-    //             }
-    //         );
-    //         console.log('respuesta', response.data)
-    //         return response.data;
-    //     } catch (error) {
-    //         console.error('Error al obtener el ganador:', error?.response?.data || error.message);
-    //         throw error;
-    //     }
+export const Historia = async (token) => {
+    const baseURL = 'https://rifaneon.alwaysdata.net/api';
+    try {
+        const response = await axios.get(
+            `${baseURL}/raffle/winners`,
+            {}, // cuerpo vacío
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        //   console.log('respuesta', response.data)
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener Historia:', error?.response?.data || error.message);
+        throw error;
+    }
 };
 
 
@@ -130,7 +130,8 @@ export const getRifasActivas = async () => {
             soldTickets: raffle.sold_numbers.map(number => ({ number })),
             titulo: raffle.titulo,
             descripcion: raffle.descripcion,
-            image: raffle.foto_url
+            image: raffle.foto_url,
+            premio: raffle.premio_de_ganador
         }));
         return raffles;
     } catch (error) {

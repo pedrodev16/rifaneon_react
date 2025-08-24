@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 import { toast, Toaster } from 'react-hot-toast';
-const ProfileForm = ({ user, token }) => {
+const ProfileForm = ({ user, token, onfetchUser }) => {
     const profile = user || {};
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -23,29 +24,34 @@ const ProfileForm = ({ user, token }) => {
                         'Content-Type': 'multipart/form-data',
                     },
                 }
-
             ),
             {
                 loading: 'Guardando...',
                 success: (res) => {
-                    if (res.data.errors) {
-                        setErrors(res.data.errors);
-                        return 'Guardado con errores';
-                    }
                     setLoading(false);
-                    return <b>{res.data.message || 'Guardado correctamente'}</b>;
+
+
+                    onfetchUser()
+
+                    return <b>{res.data.message || 'Datos guardados correctamente'}</b>;
 
                 },
                 error: (err) => {
                     setLoading(false);
-                    if (err.response && err.response.data && err.response.data.message) {
-                        return err.response.data.message;
+                    if (err.response) {
+                        if (err.response.status === 422) {
+                            // Errores de validación
+                            setErrors(err.response.data.errors || {});
+                            return 'Revisa los campos resaltados';
+                        }
+                        return err.response.data.message || 'Ocurrió un error';
                     }
                     return <b>Error de conexión</b>;
                 },
             }
         );
     };
+
 
     const renderError = (field) => (
         errors[field] ? <small style={{ color: 'red', display: 'block' }}>{errors[field][0]}</small> : null
@@ -94,7 +100,7 @@ const ProfileForm = ({ user, token }) => {
                         {renderError('bank')}
                     </div>
                     <div className="form-group">
-                        <label htmlFor="accountType">Tipo de Cuenta</label>
+                        <label htmlFor="accountType">Tipo de Cuenta {"(Obcional)"}</label>
                         <select id="accountType" name="account_type"
                             defaultValue={profile.account_type || 'ahorro'} className={inputClass('account_type')}>
                             <option value="ahorro">Ahorro</option>
@@ -103,7 +109,7 @@ const ProfileForm = ({ user, token }) => {
                         {renderError('account_type')}
                     </div>
                     <div className="form-group">
-                        <label htmlFor="accountNumber">Número de Cuenta</label>
+                        <label htmlFor="accountNumber">Número de Cuenta {"(Opcional)"}</label>
                         <input type="text" id="accountNumber" autoComplete="account_number" name="account_number"
                             defaultValue={profile.account_number || ''} className={inputClass('account_number')} />
                         {renderError('account_number')}

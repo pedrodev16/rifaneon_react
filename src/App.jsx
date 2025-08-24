@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
+import Swal from 'sweetalert2'
 import {
     getInitialData,
     getSaldo,
     getRifasActivas,
     ComprarTicket,
+    Historia,
     fetchProfile,
     fetchChatMessages,
     sendChatMessage
@@ -91,7 +93,11 @@ function App() {
         }
     }, [raffle]);
 
+    const Carga_Historia = useCallback(async () => {
+        const data = await Historia(token);
+        setWinners(data);
 
+    }, []);
 
     const Cargar_Rifas_Activas = useCallback(async () => {
         try {
@@ -352,8 +358,8 @@ function App() {
 
                 GenerGanador(data.ganador, data.perdedores_tickets);
 
-                setSaldo(parseFloat(data.user.balance));
-
+                // setSaldo(parseFloat(data.user.balance));
+                Carga_Historia();
 
                 try {
                     // Obtener rifas activas
@@ -383,10 +389,12 @@ function App() {
 
 
 
-            } else {
-                setSaldo(parseFloat(data.user.balance));
-
             }
+
+            if (user.id_user == data.user.id) {
+                setSaldo(parseFloat(data.user.balance));
+            }
+
         });
 
 
@@ -570,7 +578,13 @@ function App() {
         if (user && profileComplete) {
             setModalOpen('confirm');
         } else {
-            alert('Por favor, completa tu perfil antes de comprar un boleto.');
+
+            Swal.fire({
+                title: 'Espera!',
+                text: 'Por favor, completa tu perfil antes de comprar un boleto.',
+                icon: 'info',
+                confirmButtonText: 'Ok'
+            })
             setCurrentView(profileComplete ? 'raffle' : 'profile');
         }
     };
@@ -612,10 +626,15 @@ function App() {
         setnumeroSeleccionado(null);
     };
 
+    const reset_user = () => {
+        fetchUser();
+
+    }
+
     const renderCurrentView = () => {
         switch (currentView) {
             case 'profile':
-                return <ProfileForm user={user} token={token} />;
+                return <ProfileForm user={user} token={token} onfetchUser={reset_user} />;
             case 'history':
                 return <History winners={winners} />;
             case 'winnerAnimation':

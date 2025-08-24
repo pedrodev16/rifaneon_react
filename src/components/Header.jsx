@@ -2,7 +2,13 @@ import React from 'react';
 
 const Header = ({ user, saldo, currentView, onNavigate, onRecharge, onLogout }) => {
 
-
+    function formatoMoneda(valor, moneda = "VES", locale = "es-VE") {
+        return new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: moneda,
+            minimumFractionDigits: 2,
+        }).format(valor);
+    }
 
 
     return (
@@ -23,7 +29,7 @@ const Header = ({ user, saldo, currentView, onNavigate, onRecharge, onLogout }) 
             <div className="user-panel">
                 <div className="balance-display">
                     <i data-lucide="gem"></i>
-                    <span>Bs {saldo != null ? Number(saldo).toFixed(2) : '0.00'}</span>
+                    <span>{saldo != null ? formatoMoneda(saldo) : '0.00'}</span>
                 </div>
                 <button className="btn btn-primary" onClick={onRecharge}>Recargar</button>
                 <div className="user-profile-menu">

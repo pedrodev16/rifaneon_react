@@ -5,6 +5,13 @@ import '../styles/mensajes.css';
 
 const Raffle = ({ selectedRaffleId, setSelectedRaffleId, tipo, setTipo, raffle, selectedRaffle, onSelectRaffle, handlers }) => {
 
+    function formatoMoneda(valor, moneda = "VES", locale = "es-VE") {
+        return new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: moneda,
+            minimumFractionDigits: 2,
+        }).format(valor);
+    }
 
     useEffect(() => {
 
@@ -63,10 +70,15 @@ const Raffle = ({ selectedRaffleId, setSelectedRaffleId, tipo, setTipo, raffle, 
                 <p className="text-md text-gray-300 italic mt-1">
                     ✨ ¡Elige tu número de la suerte y participa ahora!
                 </p>
+                <p className="text-xl text-yellow-300 font-semibold mt-4 bg-gray-800 px-4 py-2 rounded-lg shadow-md animate-pulse">
+                    🎉 Premio del ganador: <span className="text-white">{formatoMoneda(selectedRaffle.premio)}</span>
+                </p>
+
+
             </div>
             <div className="raffle-controls">
                 <div className="ticket-price">
-                    Precio: <span>Bs {selectedRaffle.ticketPrice}</span>
+                    Precio: <span>{formatoMoneda(selectedRaffle.ticketPrice)}</span>
                 </div>
                 <div className="raffle-size-selector">
                     <span>Tamaño:</span>
