@@ -92,7 +92,7 @@ const Raffle = ({ selectedRaffleId, setSelectedRaffleId, tipo, setTipo, raffle, 
                                 onClick={() => {
                                     setSelectedRaffleId(r.id); // ← ¡Ahora sí dinámico!
                                     setTipo(r.size);
-                                    alert(r.size)
+
                                     handlers.onRaffleSizeChange(r.size);
                                 }}
                             >
