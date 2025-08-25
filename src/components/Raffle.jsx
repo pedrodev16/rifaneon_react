@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { P_loader } from './P_loader';
 import { a } from 'framer-motion/client';
 import '../styles/mensajes.css';
+import { Trophy } from 'lucide-react';
 
 const Raffle = ({ selectedRaffleId, setSelectedRaffleId, tipo, setTipo, raffle, selectedRaffle, onSelectRaffle, handlers }) => {
 
@@ -62,7 +63,15 @@ const Raffle = ({ selectedRaffleId, setSelectedRaffleId, tipo, setTipo, raffle, 
 
         <div className="raffle-container ">
 
-            <div className="raffle-header text-center py-6 animate-fade-in">
+            <div
+                className="raffle-header py-6 animate-fade-in "
+                style={{
+                    backgroundImage: "url('img/raffle.png')",
+                    backgroundAttachment: "fixed",
+                    backgroundSize: "cover",
+                    backgroundPosition: "bottom",
+                }}
+            >
                 <h2 className="text-3xl font-bold text-white drop-shadow-md">
                     🎉 Sorteo en Curso: <span className="text-yellow-400">{selectedRaffle.size}</span> Números
                 </h2>
@@ -70,9 +79,15 @@ const Raffle = ({ selectedRaffleId, setSelectedRaffleId, tipo, setTipo, raffle, 
                 <p className="text-md text-gray-300 italic mt-1">
                     ✨ ¡Elige tu número de la suerte y participa ahora!
                 </p>
-                <p className="text-xl text-yellow-300 font-semibold mt-4 bg-gray-800 px-4 py-2 rounded-lg shadow-md animate-pulse">
-                    🎉 Premio del ganador: <span className="text-white">{formatoMoneda(selectedRaffle.premio)}</span>
+                <p
+                    style={{ background: "#17082e" }}
+                    className="flex items-center justify-center gap-2 text-xl text-yellow-300 font-semibold mt-4 px-4 py-2 rounded-lg shadow-md animate-pulse whitespace-nowrap text-center"
+                >
+                    <Trophy color="#00ffe1" className="w-6 h-6 flex-shrink-0" />
+                    <span>Premio del ganador:</span>
+                    <span className="text-white">{formatoMoneda(selectedRaffle.premio)}</span>
                 </p>
+
 
 
             </div>

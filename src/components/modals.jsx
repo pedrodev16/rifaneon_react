@@ -34,41 +34,133 @@ export const ConfirmModal = ({ isOpen, selectedNumber, ticketPrice, balance, onC
     );
 };
 
+import React, { useState } from "react";
+import { Copy } from "lucide-react";
+
 export const RechargeModal = ({ isOpen, onClose, onRecharge }) => {
+    const [method, setMethod] = useState("");
+    const [copied, setCopied] = useState(false);
 
     if (!isOpen) return null;
 
+    const handleCopy = (text) => {
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
     return (
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <h2>Recargar Saldo</h2>
                 <form onSubmit={onRecharge}>
                     <div className="form-group">
                         <label htmlFor="amount">Monto a recargar (Bs)</label>
-                        <input type="number" id="amount" name="amount" step="0.01" min="1" required />
+                        <input
+                            type="number"
+                            id="amount"
+                            name="amount"
+                            step="0.01"
+                            min="1"
+                            required
+                        />
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="payment-method">Método de pago</label>
-                        <select id="payment-method" name="payment_method">
-                            <option>Selecciona un método</option>
-                            <option>Pago Móvil</option>
-                            <option>Transferencia</option>
+                        <select
+                            id="payment-method"
+                            name="payment_method"
+                            value={method}
+                            onChange={(e) => setMethod(e.target.value)}
+                        >
+                            <option style={{ background: "#341361" }} value="">Selecciona un método</option>
+                            <option style={{ background: "#341361" }} value="pagomovil">Pago Móvil</option>
+                            <option style={{ background: "#2f243fff" }} disabled>
+                                🚫 Transferencia (no disponible)
+                            </option>
                         </select>
                     </div>
-                    <div className="form-group">
+
+                    {/* 🔥 Mostrar datos si selecciona Pago Móvil */}
+                    {method === "pagomovil" && (
+                        <div
+                            className="p-4 rounded-lg bg-[#0a0014] text-pink-400 text-sm mt-3 font-mono border border-pink-500"
+                            style={{
+                                boxShadow:
+                                    "rgb(217, 0, 255) 0px 0px 21.8208px 0px, rgb(217, 0, 255) 0px 0px 38.1792px 0px inset",
+                            }}
+                        >
+                            <p className="mb-1">
+                                <strong className="text-yellow-300 drop-shadow-[0_0_6px_#ff0]">
+                                    Banco:
+                                </strong>{" "}
+                                🇻🇪 0102 (Venezuela)
+                            </p>
+                            <p className="mb-1">
+                                <strong className="text-yellow-300 drop-shadow-[0_0_6px_#ff0]">
+                                    Teléfono:
+                                </strong>{" "}
+                                0424-3311814
+                            </p>
+                            <p className="mb-2">
+                                <strong className="text-yellow-300 drop-shadow-[0_0_6px_#ff0]">
+                                    Cédula:
+                                </strong>{" "}
+                                25.549.789
+                            </p>
+
+                            <button
+                                type="button"
+                                onClick={() => handleCopy("0102 04243311814 25549789")}
+                                className="mt-2 flex items-center gap-2 text-black font-bold px-4 py-2 rounded-lg transition-transform duration-300"
+                                style={{
+                                    background: "linear-gradient(90deg, #ff00ff, #ffcc00)",
+                                    boxShadow:
+                                        "rgb(217, 0, 255) 0px 0px 21.8208px 0px, rgb(217, 0, 255) 0px 0px 38.1792px 0px inset",
+                                }}
+                            >
+                                <Copy size={18} className="text-black" />
+                                {copied ? "✨ Copiado!" : "⚡ Copiar datos"}
+                            </button>
+                        </div>
+
+
+                    )}
+
+                    <div className="form-group mt-3">
                         <label htmlFor="reference">Número de referencia</label>
                         <input type="text" id="reference" name="reference" required />
                     </div>
-                    <p style={{ fontSize: '0.8rem', textAlign: 'center', opacity: 0.8 }}>Tu recarga será procesada en unos minutos.</p>
+
+                    <p
+                        style={{
+                            fontSize: "0.8rem",
+                            textAlign: "center",
+                            opacity: 0.8,
+                        }}
+                    >
+                        Tu recarga será procesada en unos minutos.
+                    </p>
+
                     <div className="modal-actions">
-                        <button type="button" className="btn btn-danger" onClick={onClose}>Cancelar</button>
-                        <button type="submit" className="btn btn-primary">Aplicar Recarga</button>
+                        <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={onClose}
+                        >
+                            Cancelar
+                        </button>
+                        <button type="submit" className="btn btn-primary">
+                            Aplicar Recarga
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     );
 };
+
 
 
 // RechargePendingModal.jsx

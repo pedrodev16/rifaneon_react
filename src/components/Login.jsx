@@ -14,50 +14,135 @@ const Login = ({ onLogin }) => {
     return (
         <div
             className="min-h-screen bg-cover bg-center flex flex-col items-center justify-start py-10"
-            style={{ backgroundImage: 'url(rifaneon2.png)' }}
+            style={{ backgroundImage: "url(rifaneon2.png)" }}
         >
             {showConfetti && <Confetti />}
 
             {/* Login Box */}
-            <div className="bg-gray-900 text-white p-8 rounded-2xl shadow-2xl w-full max-w-md mb-8">
-                <h1 className="text-4xl font-bold text-yellow-400 mb-4 text-center">RIFANEON</h1>
-                <p className="text-center text-gray-300 mb-6">
-                    🎟️ Participa en rifas, gana premios increíbles y cobra fácilmente desde nuestra plataforma.
-                </p>
-                <button
-                    className="flex items-center justify-center gap-3 w-full bg-white text-black font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition"
-                    onClick={onLogin}
-                >
-                    <img src="/google-logo.png" alt="Google logo" className="w-6 h-6" />
-                    <span>Iniciar sesión con Google</span>
-                </button>
+            <div className="flex flex-row items-center justify-center gap-6 flex-wrap mb-8">
+                {/* Caja RIFANEON */}
+                <div
+                    className="text-white p-6 rounded-2xl w-full max-w-xs sm:max-w-sm md:max-w-md text-center flex-shrink-0"
+                    style={{
+                        background: "#0a0014",
+                        border: "1px solid #d900ff",
+                        boxShadow:
+                            "rgb(217, 0, 255) 0px 0px 21.8208px, rgb(217, 0, 255) 0px 0px 38.1792px inset",
+                    }}>
+                    <div className="flex justify-center items-center gap-4 w-full">
+                        <img style={{ width: "27%" }}
+                            src="img/rifaneon_logo.gif"
+                            alt="Chica casino neon"
+
+                        />
+                    </div>
+                    <p className="text-gray-300 mb-6 text-sm leading-relaxed">
+
+                        🎟️ Participa en rifas, gana premios increíbles y cobra fácilmente desde
+                        nuestra plataforma.
+                    </p>
+                    <button
+                        className="flex items-center justify-center gap-3 w-full font-semibold py-2 px-4 rounded-lg transition-transform transform hover:scale-105"
+                        style={{
+                            background: "linear-gradient(335deg, rgb(0 196 255), rgb(28 44 173))",
+                            color: "#fff",
+                            boxShadow:
+                                "rgb(72 11 253) 0px 0px 21px, #0008ffd6 0px 0px 35px inset",
+                        }}
+                        onClick={onLogin}
+                    >
+                        <img
+                            src="/google-logo.png"
+                            alt="Google logo"
+                            className="w-6 h-6 bg-white rounded-full"
+                        />
+                        <span>Iniciar sesión con Google</span>
+                    </button>
+                </div>
+
+                {/* Imagen decorativa */}
+                <div className="flex-shrink-0 flex justify-center">
+                    <img
+                        src="img/chica_rifaneon2.png"
+                        alt="Chica casino neon"
+                        className="w-32 sm:w-44 md:w-56 lg:w-64 drop-shadow-[0_0_25px_#d900ff] object-contain"
+                    />
+                </div>
             </div>
+
+
 
 
             {/* Información en grilla */}
-            <div className="max-w-5xl w-full bg-gray-900 text-white p-6 rounded-2xl shadow-lg overflow-y-auto">
+            <div
+                className="max-w-5xl w-full p-6 rounded-2xl overflow-y-auto"
+                style={{
+                    background: "#0f001a",
+                    border: "1px solid #d900ff",
+                    boxShadow:
+                        "rgb(217, 0, 255) 0px 0px 21.8208px, rgb(217, 0, 255) 0px 0px 38.1792px inset",
+                }}
+            >
                 {/* Cómo Jugar */}
-                <h2 className="text-2xl font-bold text-yellow-400 mb-4">🎮 Cómo Jugar</h2>
+                <h2 className="text-3xl font-bold text-yellow-400 mb-4 drop-shadow-[0_0_8px_#ff0]">
+                    🎮 Cómo Jugar
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <InfoItem icon={<Wallet className="text-yellow-400 w-6 h-6" />} text="Recarga tu saldo usando métodos locales como Pago Móvil o transferencia." />
-                    <InfoItem icon={<CheckCircle className="text-green-400 w-6 h-6" />} text="Cuando se apruebe tu saldo, selecciona tus números favoritos." />
-                    <InfoItem icon={<CheckCircle className="text-blue-400 w-6 h-6" />} text="Confirma tu compra y el valor se descontará de tu saldo." />
-                    <InfoItem icon={<Dice5 className="text-purple-400 w-6 h-6" />} text="Cuando se vendan todos los números, comenzará el sorteo automáticamente." />
-                    <InfoItem icon={<Gift className="text-pink-400 w-6 h-6" />} text="Un número se elegirá al azar y se anunciará el ganador." />
-                    <InfoItem icon={<Timer className="text-red-400 w-6 h-6" />} text="Si ganas 🎉 recibirás el premio en minutos." />
+                    <InfoItem
+                        icon={<Wallet className="text-yellow-400 w-6 h-6 drop-shadow-[0_0_6px_#ff0]" />}
+                        text="Recarga tu saldo usando métodos locales como Pago Móvil o transferencia."
+                    />
+                    <InfoItem
+                        icon={<CheckCircle className="text-green-400 w-6 h-6 drop-shadow-[0_0_6px_#0f0]" />}
+                        text="Cuando se apruebe tu saldo, selecciona tus números favoritos."
+                    />
+                    <InfoItem
+                        icon={<CheckCircle className="text-blue-400 w-6 h-6 drop-shadow-[0_0_6px_#0ff]" />}
+                        text="Confirma tu compra y el valor se descontará de tu saldo."
+                    />
+                    <InfoItem
+                        icon={<Dice5 className="text-purple-400 w-6 h-6 drop-shadow-[0_0_6px_#f0f]" />}
+                        text="Cuando se vendan todos los números, comenzará el sorteo automáticamente."
+                    />
+                    <InfoItem
+                        icon={<Gift className="text-pink-400 w-6 h-6 drop-shadow-[0_0_6px_#f0f]" />}
+                        text="Un número se elegirá al azar y se anunciará el ganador."
+                    />
+                    <InfoItem
+                        icon={<Timer className="text-red-400 w-6 h-6 drop-shadow-[0_0_6px_#f00]" />}
+                        text="Si ganas 🎉 recibirás el premio en minutos."
+                    />
                 </div>
 
                 {/* Reglas y Condiciones */}
-                <h2 className="text-2xl font-bold text-yellow-400 mt-6 mb-4">📜 Reglas y Condiciones</h2>
+                <h2 className="text-3xl font-bold text-yellow-400 mt-6 mb-4 drop-shadow-[0_0_8px_#ff0]">
+                    📜 Reglas y Condiciones
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <InfoItem icon={<Timer className="text-yellow-400 w-6 h-6" />} text="El pago al ganador se realiza en un plazo máximo de minutos." />
-                    <InfoItem icon={<ShieldAlert className="text-blue-400 w-6 h-6" />} text="Se descuenta automáticamente el valor de un número por mantenimiento de la plataforma." />
-                    <InfoItem icon={<Ban className="text-red-400 w-6 h-6" />} text="No nos hacemos responsables de errores en datos bancarios ni de terceros malintencionados." />
-                    <InfoItem icon={<FileText className="text-green-400 w-6 h-6" />} text="Participar implica aceptar todas las reglas." />
-                    <InfoItem icon={<ShieldAlert className="text-yellow-400 w-6 h-6" />} text="Juega con responsabilidad." />
+                    <InfoItem
+                        icon={<Timer className="text-yellow-400 w-6 h-6 drop-shadow-[0_0_6px_#ff0]" />}
+                        text="El pago al ganador se realiza en un plazo máximo de minutos."
+                    />
+                    <InfoItem
+                        icon={<ShieldAlert className="text-blue-400 w-6 h-6 drop-shadow-[0_0_6px_#0ff]" />}
+                        text="Se descuenta automáticamente el valor de un número por mantenimiento de la plataforma."
+                    />
+                    <InfoItem
+                        icon={<Ban className="text-red-400 w-6 h-6 drop-shadow-[0_0_6px_#f00]" />}
+                        text="No nos hacemos responsables de errores en datos bancarios ni de terceros malintencionados."
+                    />
+                    <InfoItem
+                        icon={<FileText className="text-green-400 w-6 h-6 drop-shadow-[0_0_6px_#0f0]" />}
+                        text="Participar implica aceptar todas las reglas."
+                    />
+                    <InfoItem
+                        icon={<ShieldAlert className="text-yellow-400 w-6 h-6 drop-shadow-[0_0_6px_#ff0]" />}
+                        text="Juega con responsabilidad."
+                    />
                 </div>
             </div>
         </div>
+
     );
 };
 
