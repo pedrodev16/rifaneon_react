@@ -68,10 +68,10 @@ const Raffle = ({ selectedRaffleId, setSelectedRaffleId, tipo, setTipo, raffle, 
 
             >
                 <h2 className="text-3xl font-bold text-white drop-shadow-md" >
-                    🎉 Sorteo en Curso: <span className="text-yellow-400">{selectedRaffle.size}</span> Números
+                    🎉 Sorteo en Curso:
                 </h2>
                 <h1 className="text-lg text-gray-200 mt-2 glowing-text">{selectedRaffle.titulo}</h1>
-
+                <p><span className="text-yellow-400">{selectedRaffle.size}</span> Números</p>
                 <p
                     style={{ background: "#17082e" }}
                     className="flex items-center justify-center gap-2 text-xl text-yellow-300 font-semibold mt-4 px-4 py-2 rounded-lg shadow-md animate-pulse whitespace-nowrap text-center"
