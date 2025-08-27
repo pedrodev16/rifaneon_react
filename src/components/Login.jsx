@@ -38,8 +38,7 @@ const Login = ({ onLogin }) => {
                     </div>
                     <p className="text-gray-300 mb-6 text-sm leading-relaxed">
 
-                        🎟️ Participa en rifas, gana premios increíbles y cobra fácilmente desde
-                        nuestra plataforma.
+                        ¡Haz clic, participa y celebra! Rifas instantáneas, premios que te sacan una sonrisa y una plataforma que te lo pone fácil.
                     </p>
                     <button
                         className="flex items-center justify-center gap-3 w-full font-semibold py-2 px-4 rounded-lg transition-transform transform hover:scale-105"
@@ -88,10 +87,18 @@ const Login = ({ onLogin }) => {
                     🎮 Cómo Jugar
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+
+                    <InfoItem
+                        icon={<ShieldAlert className="text-blue-400 w-6 h-6 drop-shadow-[0_0_7px_#0ff]" />}
+                        text="Completa primero tu perfil con tus datos bancarios. El sistema solo permite comprar números si tienes tus datos actualizados. Estos datos serán usados en caso de que ganes para transferirte tu premio."
+                    />
+
                     <InfoItem
                         icon={<Wallet className="text-yellow-400 w-6 h-6 drop-shadow-[0_0_6px_#ff0]" />}
                         text="Recarga tu saldo usando métodos locales como Pago Móvil o transferencia."
                     />
+
+
                     <InfoItem
                         icon={<CheckCircle className="text-green-400 w-6 h-6 drop-shadow-[0_0_6px_#0f0]" />}
                         text="Cuando se apruebe tu saldo, selecciona tus números favoritos."
@@ -123,10 +130,10 @@ const Login = ({ onLogin }) => {
                         icon={<Timer className="text-yellow-400 w-6 h-6 drop-shadow-[0_0_6px_#ff0]" />}
                         text="El pago al ganador se realiza en un plazo máximo de minutos."
                     />
-                    <InfoItem
+                    {/* <InfoItem
                         icon={<ShieldAlert className="text-blue-400 w-6 h-6 drop-shadow-[0_0_6px_#0ff]" />}
                         text="Se descuenta automáticamente el valor de un número por mantenimiento de la plataforma."
-                    />
+                    /> */}
                     <InfoItem
                         icon={<Ban className="text-red-400 w-6 h-6 drop-shadow-[0_0_6px_#f00]" />}
                         text="No nos hacemos responsables de errores en datos bancarios ni de terceros malintencionados."

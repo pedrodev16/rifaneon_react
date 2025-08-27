@@ -23,6 +23,44 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: 'MiFuente';
+    src: url('../font/CasinoShadow.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px #9ff000;
+    }
+
+    25% {
+        text-shadow: 0 0 10px #00f0ff;
+    }
+
+    50% {
+        text-shadow: 0 0 10px #ff00aa;
+    }
+
+    75% {
+        text-shadow: 0 0 10px #ff9900;
+    }
+
+    100% {
+        text-shadow: 0 0 10px #9ff000;
+    }
+}
+
+
+
+.glowing-text {
+    font-family: 'MiFuente', sans-serif;
+    font-size: 3.1rem;
+    color: #facc15;
+    animation: glow 3s infinite ease-in-out;
+}
+
 html,
 body {
     height: 100%;
@@ -256,13 +294,14 @@ body {
 
 .raffle-header {
     text-align: center;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
 }
 
 .raffle-header h2 {
-    color: var(--primary-neon);
-    text-shadow: 0 0 5px var(--primary-neon);
+    color: #ffc83d;
+    /* text-shadow: 0 0 15px #2fd5c0; */
     margin-bottom: 0.5rem;
+    -webkit-text-stroke: 1px #79092e;
 }
 
 .raffle-header p {

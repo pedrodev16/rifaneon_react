@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { toast, Toaster } from 'react-hot-toast';
+import { ShieldAlert } from 'lucide-react';
 const ProfileForm = ({ user, token, onfetchUser }) => {
     const profile = user || {};
     const [errors, setErrors] = useState({});
@@ -63,6 +64,10 @@ const ProfileForm = ({ user, token, onfetchUser }) => {
         <div className="profile-container">
             <h2>Actualiza tu Perfil</h2>
             <p>Estos datos son necesarios para procesar tus pagos en caso de que ganes.</p>
+            <InfoItem
+                icon={<ShieldAlert className="text-blue-400 w-6 h-6 drop-shadow-[0_0_7px_#0ff]" />}
+                text="Completa tu perfil con tus datos bancarios. El sistema solo permite comprar números si tienes tus datos actualizados. Estos datos serán usados en caso de que ganes para transferirte tu premio."
+            />
             <form className="profile-form" onSubmit={handleSubmit}>
                 <div className="form-grid">
                     <div className="form-group">
@@ -141,5 +146,10 @@ const ProfileForm = ({ user, token, onfetchUser }) => {
         </div>
     );
 };
-
+const InfoItem = ({ icon, text }) => (
+    <div className=" p-4 rounded-lg shadow-md flex items-start gap-3" style={{ background: 'rgb(0 106 255 / 46%)' }}>
+        {icon}
+        <p>{text}</p>
+    </div>
+);
 export default ProfileForm;
