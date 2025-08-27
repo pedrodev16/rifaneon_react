@@ -99,6 +99,24 @@ function App() {
 
     }, []);
 
+    const logoutapp = () => {
+        Swal.fire({
+            title: "¿quieres cerrar la cuenta de rifaneon?",
+
+            showCancelButton: true,
+            confirmButtonText: "Cerrar",
+
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                Swal.fire("Cuenta cerrarda!", "", "success");
+                logout()
+            } else if (result.isDenied) {
+                Swal.fire("Changes are not saved", "", "info");
+            }
+        });
+    }
+
     const Cargar_Rifas_Activas = useCallback(async () => {
         try {
             const data = await getRifasActivas(token);
@@ -709,7 +727,7 @@ function App() {
                         currentView={currentView}
                         onNavigate={setCurrentView}
                         onRecharge={() => setModalOpen('recharge')}
-                        onLogout={logout}
+                        onLogout={logoutapp}
                     />
 
                     <main>
