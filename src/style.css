@@ -974,3 +974,37 @@ body {
         transform: rotate(360deg);
     }
 }
+
+.my-swal-popup {
+
+    border-radius: 16px;
+    padding: 20px;
+    background: #ffffffeb;
+    box-shadow: 0 0 20px rgb(160 15 225 / 91%);
+
+}
+
+.my-swal-title {
+    font-size: 1.4rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.my-confirm-btn {
+    background-color: #ff3b3b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.my-cancel-btn {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}

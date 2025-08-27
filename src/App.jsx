@@ -101,18 +101,23 @@ function App() {
 
     const logoutapp = () => {
         Swal.fire({
-            title: "¿quieres cerrar la cuenta de rifaneon?",
-
+            title: "¿Estás seguro de cerrar tu cuenta de RifaNeon?",
+            text: "Nos encantó compartir momentos contigo. Cuando quieras volver a ganar y sonreír, aquí estaremos.",
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Cerrar",
-
+            confirmButtonText: "Cerrar cuenta",
+            cancelButtonText: "Cancelar",
+            buttonsStyling: false, // Desactiva estilos por defecto
+            customClass: {
+                popup: 'my-swal-popup',
+                title: 'my-swal-title',
+                confirmButton: 'my-confirm-btn',
+                cancelButton: 'my-cancel-btn'
+            }
         }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                Swal.fire("Cuenta cerrarda!", "", "success");
-                logout()
-            } else if (result.isDenied) {
-                Swal.fire("Changes are not saved", "", "info");
+                Swal.fire("Cuenta cerrada", "", "success");
+                logout();
             }
         });
     }
