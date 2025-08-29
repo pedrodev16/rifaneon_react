@@ -199,7 +199,8 @@ function App() {
         // 🔹 Escuchar cuando se aprueba una recarga
         socket.on("recarga:aprobada", (data) => {
             console.log("Recarga aprobada recibida:", data);
-            if (data.userId === usuarioActual.id) {
+            console.log(user)
+            if (data.userId === user.id) {
                 // actualizar saldo en la interfaz
                 setSaldo(data.nuevoSaldo);
             }
