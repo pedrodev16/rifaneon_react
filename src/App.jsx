@@ -193,6 +193,18 @@ function App() {
         const socket = socketRef.current;
 
 
+
+
+
+        // 🔹 Escuchar cuando se aprueba una recarga
+        socket.on("recarga:aprobada", (data) => {
+            console.log("Recarga aprobada recibida:", data);
+            if (data.userId === usuarioActual.id) {
+                // actualizar saldo en la interfaz
+                setSaldo(data.nuevoSaldo);
+            }
+        });
+
         // Conectar al socket
         socket.on('connect', () => {
             console.log('Conectado al socket:', socket.id);
@@ -216,14 +228,6 @@ function App() {
             }));
         });
 
-        // 🔹 Escuchar cuando se aprueba una recarga
-        socket.on("recarga:aprobada", (data) => {
-            console.log("Recarga aprobada recibida:", data);
-            if (data.userId === usuarioActual.id) {
-                // actualizar saldo en la interfaz
-                setSaldo(data.nuevoSaldo);
-            }
-        });
 
 
         socket.on('numeroComprado', async (data) => {
