@@ -200,7 +200,7 @@ function App() {
         socket.on("recarga:aprobada", (data) => {
             console.log("Recarga aprobada recibida:", data);
             console.log(user)
-            if (data.userId === user.id) {
+            if (data.userId === user.id_user) {
                 // actualizar saldo en la interfaz
                 setSaldo(data.nuevoSaldo);
             }
