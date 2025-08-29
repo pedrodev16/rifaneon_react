@@ -202,6 +202,7 @@ function App() {
             console.log(user)
             if (data.userId === user.id_user) {
                 // actualizar saldo en la interfaz
+                toast.success('!Recarga aprobada')
                 setSaldo(data.nuevoSaldo);
             }
         });
