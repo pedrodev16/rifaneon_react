@@ -136,12 +136,11 @@ export function UserProvider({ children }) {
         const method = event.target.payment_method.value;
         const reference = event.target.reference.value;
 
-
         if (!amount || !method || !reference) {
-
-            toast.error("Todos los campos son obligatorios.")
+            toast.error("Todos los campos son obligatorios.");
             return;
         }
+
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(
@@ -158,15 +157,32 @@ export function UserProvider({ children }) {
                     }
                 }
             );
-            toast.success(response.data.message || "soliscitud de recarga enviada correctamente.");
 
+            toast.success(response.data.message || "Solicitud de recarga enviada correctamente.");
+            setModalOpen('inform');
         } catch (error) {
-            console.error("Error en recarga:", error.response?.data || error.message);
+            // console.error("Error en recarga:", error.response?.data || error.message);
+
+            if (error.response) {
+                // Laravel envía mensaje en el JSON
+                const msg = error.response.data.message || "Error al procesar la recarga.";
+
+                if (error.response.status === 403) {
+                    toast.error(msg || "Ya tienes 3 recargas pendientes.");
+                } else if (error.response.status === 422) {
+                    toast.error("Referencia ya registrada o datos inválidos.");
+                } else {
+                    toast.error(msg);
+                }
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
         } finally {
             setModalOpen(null);
-            setModalOpen('inform');
+
         }
     };
+
 
 
 
