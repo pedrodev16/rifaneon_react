@@ -160,6 +160,7 @@ export function UserProvider({ children }) {
 
             toast.success(response.data.message || "Solicitud de recarga enviada correctamente.");
             setModalOpen('inform');
+
         } catch (error) {
             // console.error("Error en recarga:", error.response?.data || error.message);
 
@@ -177,9 +178,6 @@ export function UserProvider({ children }) {
             } else {
                 toast.error("No se pudo conectar con el servidor.");
             }
-        } finally {
-            setModalOpen(null);
-
         }
     };
 

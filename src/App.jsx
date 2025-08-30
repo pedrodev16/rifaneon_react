@@ -222,6 +222,12 @@ function App() {
             setChat(prev => ({ ...prev, messages: [...prev.messages, msg] }));
         });
 
+        socket.on("chat:warning", (msg) => {
+            // Mostrar alerta, toast, modal o notificación
+            alert(msg);
+            // o si usas tu sistema de notificaciones
+            toast.error(msg);
+        });
 
         socket.on('chat:message', (msg) => {
             setChat(prev => ({
