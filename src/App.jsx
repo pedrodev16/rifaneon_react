@@ -182,6 +182,27 @@ function App() {
 
 
     // Cargar mensajes iniciales desde Laravel
+
+
+
+    useEffect(() => {
+        if (!token) return;
+
+        socketRef.current = io("https://websocket-rifaneon.onrender.com", {
+            auth: { token },
+            transports: ['websocket'] // opcional, pero útil para evitar problemas con polling
+        });
+        const socket = socketRef.current;
+
+
+        socket.on("chat:warning", (msg) => {
+            // Mostrar alerta, toast, modal o notificación
+            alert(msg);
+            // o si usas tu sistema de notificaciones
+            toast.error(msg);
+        });
+    }, [])
+
     useEffect(() => {
 
         if (!token) return;
@@ -222,12 +243,7 @@ function App() {
             setChat(prev => ({ ...prev, messages: [...prev.messages, msg] }));
         });
 
-        socket.on("chat:warning", (msg) => {
-            // Mostrar alerta, toast, modal o notificación
-            alert(msg);
-            // o si usas tu sistema de notificaciones
-            toast.error(msg);
-        });
+
 
         socket.on('chat:message', (msg) => {
             setChat(prev => ({
